@@ -32,7 +32,7 @@ gem "fcm"
 gem "figaro"
 
 group :development, :test do
-  gem "sqlite3"
+  gem "sqlite3", "1.3.12"
   gem "byebug", platform: :mri
 end
 
@@ -44,7 +44,7 @@ group :development do
 end
 
 group :production do
-  gem "pg", "0.17.1"
+  gem "pg", "0.18.4"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
