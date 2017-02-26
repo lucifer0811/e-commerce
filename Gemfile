@@ -32,6 +32,7 @@ gem "fcm"
 gem "figaro"
 
 group :development, :test do
+  gem "sqlite3"
   gem "byebug", platform: :mri
 end
 
