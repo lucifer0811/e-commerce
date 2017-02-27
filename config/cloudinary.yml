@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dnvmk5bvc
+  api_key: '314365619968676'
+  api_secret: H9yEaXR-Q0Oub8dz5viNFuJ2J38
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dnvmk5bvc
+  api_key: '314365619968676'
+  api_secret: H9yEaXR-Q0Oub8dz5viNFuJ2J38
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dnvmk5bvc
+  api_key: '314365619968676'
+  api_secret: H9yEaXR-Q0Oub8dz5viNFuJ2J38
+  enhance_image_tag: true
+  static_image_support: false
