@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   before_create :generate_authentication_token!
 
-  validates :phone_number, presence: true, length: {minimum: 10, maximum: 11}
+  validates :phone_number, length: {minimum: 10, maximum: 11}
   mount_base64_uploader :avatar, PhotoUploader
 
   ATTRIBUTES_PARAMS = [:name, :email, :password, :password_confirmation,
