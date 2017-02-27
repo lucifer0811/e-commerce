@@ -1,9 +1,10 @@
 class Api::V1::UsersController < ApplicationController
   load_resource
   respond_to :json
+  before_action :authenticate_with_token!, only: [:update, :show]
 
   def show
-    respond_with User.find_by id params[:id]
+    respond_with User.find_by id: params[:id]
   end
 
   def create
