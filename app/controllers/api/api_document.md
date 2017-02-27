@@ -85,7 +85,7 @@
 
 **Request example:**
 
-  * `POST: {"user": {"full_name": "Tran Thi Hong Thuy", "email": "tran.thi.hong.thuy@gmail.com", "password": "12345678", "password_confirmation": "12345678", "phone_number": "0987654321"}}`
+  * `POST: {"user": {"name": "Tran Thi Hong Thuy", "email": "tran.thi.hong.thuy@gmail.com", "password": "12345678", "password_confirmation": "12345678", "phone_number": "0987654321"}}`
 
 **Response:**
 
@@ -93,14 +93,14 @@
 
     `{
       "user": {
-        "id": 2,
-        "name": null,
+        "id": 1,
+        "name": "Tran Thi Hong Thuy",
         "email": "tran.thi.hong.thuy@gmail.com",
         "avatar": null,
         "birthday": null,
         "phone_number": "0987654321",
         "address": null,
-        "auth_token": "4b-oELaAz4KSbqG9YvJh"
+        "auth_token": "RKHZwEacGvMCsftXNggN"
       }
     }`
 
@@ -138,7 +138,7 @@
   * `{
       "user": {
         "id": 1,
-        "name": null,
+        "name": "Tran Thi Hong Thuy",
         "email": "tran.thi.hong.thuy@gmail.com",
         "avatar": null,
         "birthday": null,
@@ -179,7 +179,7 @@
 
     `{
       "user": {
-        "id": 2,
+        "id": 1,
         "name": "Tran Thi Hong Thuy",
         "email": "tran.thi.hong.thuy@gmail.com",
         "avatar": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488215096/cvt9qrzr7twadhqmdmkp.jpg",
