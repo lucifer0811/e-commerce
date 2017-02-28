@@ -13,7 +13,7 @@
 
 **Request example:**
 
-  * `POST: {"session": {"email": phannh@gmail.com", "password": "123456"} }`
+  * `POST: {"session": {"email": "tran.thi.hong.thuy@gmail.com", "password": "12345678"} }`
 
 **Response:**
 
@@ -22,7 +22,7 @@
     `{
       "user": {
         "id": 1,
-        "name": "Nguyen Phan 11",
+        "name": "Tran Thi Hong Thuy",
         "email": "phannh@gmail.com",
         "avatar": null,
         "birthday": null,
@@ -135,18 +135,28 @@
 
 **Response:**
 
-  * `{
-      "user": {
-        "id": 1,
-        "name": "Tran Thi Hong Thuy",
-        "email": "tran.thi.hong.thuy@gmail.com",
-        "avatar": null,
-        "birthday": null,
-        "phone_number": "0987654321",
-        "address": null,
-        "auth_token": "4b-oELaAz4KSbqG9YvJh"
-      }
-    }`
+  * **Success**
+
+    * `{
+        "user": {
+          "id": 1,
+          "name": "Tran Thi Hong Thuy",
+          "email": "tran.thi.hong.thuy@gmail.com",
+          "avatar": null,
+          "birthday": null,
+          "phone_number": "0987654321",
+          "address": null,
+          "auth_token": "4b-oELaAz4KSbqG9YvJh"
+        }
+      }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
 
 --------------
 
@@ -183,12 +193,165 @@
         "name": "Tran Thi Hong Thuy",
         "email": "tran.thi.hong.thuy@gmail.com",
         "avatar": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488215096/cvt9qrzr7twadhqmdmkp.jpg",
-        "birthday": "1994-07-27T00:00:00.000Z",
+        "birthday": "1994-07-27",
         "phone_number": "0987654321",
         "address": "Vu Ban, Nam Dinh",
         "auth_token": "4b-oELaAz4KSbqG9YvJh"
       }
     }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+##3. Category
+
+### Show list categories
+
+**URL:** [api/categories](api/categories)
+
+**Method: GET **
+
+**Param request:**
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories`
+
+**Response:**
+
+  * **Success**
+
+    *
+      `{
+        "categories": [
+          {
+            "id": 1,
+            "name": "Điện thoại"
+          },
+          {
+            "id": 2,
+            "name": "Quần áo"
+          }
+        ]
+      }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+### Create new Category
+
+**URL:** [api/categories](api/categories)
+
+**Method: POST **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `name`, type: string
+
+**Request example:**
+
+  * `POST: https://ecommercev1.herokuapp.com/api/categories`
+    * `params: { "category": {"name": "Điện thoại"} }`
+
+**Response:**
+
+  * **Success**
+
+    * `{
+        "category": {
+          "id": 1,
+          "name": "Điện thoại"
+        }
+      }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+### Show category information
+
+**URL:** [api/categories](api/categories/1)
+
+**Method: GET **
+
+**Param request:**
+
+  * `id`, type: integer
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories/:id`
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories/1`
+
+**Response:**
+
+  * **Success**
+
+    * `{
+        "category": {
+          "id": 1,
+          "name": "Điện thoại"
+        }
+      }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+### Update information category
+
+**URL:** [api/categories](api/categories/1)
+
+**Method: PATCH **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `id`, type: integer
+
+**Request example:**
+
+  * `PATCH: https://ecommercev1.herokuapp.com/api/categories/1`
+  * `params: { "category": {"name": "Điện thoại 23"}`
+
+**Response:**
+
+  * **Success**
+
+    * `{
+        "category": {
+          "id": 1,
+          "name": "Điện thoại 23"
+        }
+      }`
 
     *status: 200*
 
