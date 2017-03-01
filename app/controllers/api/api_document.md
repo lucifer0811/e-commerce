@@ -362,3 +362,37 @@
     *status: 422*
 
 --------------
+
+### Delete category
+
+**URL:** [api/categories](api/categories/1)
+
+**Method: DELETE **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `id`, type: integer
+
+**Request example:**
+
+  * `DELETE: https://ecommercev1.herokuapp.com/api/categories/1`
+
+**Response:**
+
+  * **Success**
+
+    * `{
+        "success": "Category has been deleted"
+      }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
