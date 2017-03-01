@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  api:
+    v1:
+      categories:
+        destroy:
+          success: "Category has been deleted"
+          failed: "Failed to delete category"
   application:
     api:
       title: "E-Commerce"
