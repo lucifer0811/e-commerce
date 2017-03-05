@@ -11,7 +11,7 @@ class Api::V1::SessionsController < Api::ApplicationController
       user.save
       render json: user, status: 200, location: [:api, user]
     else
-      render json: { errors: "Invalid email or password" }, status: 422
+      render json: {errors: "Invalid email or password"}, status: 422
     end
   end
 
@@ -21,6 +21,7 @@ class Api::V1::SessionsController < Api::ApplicationController
       user.generate_authentication_token!
       user.save
       head :no_content
+      render json: {success: t(.".logout_success")}, status: 200
     else
       render json: {errors: t(".error_logout")}, status: :unprocessable_entity
     end

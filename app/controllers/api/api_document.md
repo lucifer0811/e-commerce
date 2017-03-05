@@ -396,3 +396,183 @@
 
 --------------
 
+##4. Product
+
+### Create new Product
+
+**URL:** [api/products](api/categories/1/products)
+
+**Method: POST **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `name`, type: string
+  * `price`, type: float
+  * `descriptions`, type: string
+  * `sales`, type: float
+  * `quantity`, type: integer
+  * `category_id`, type: integer
+  * `image for product`:
+    * `name`, type: string
+
+**Request example:**
+
+  * `POST: https://ecommercev1.herokuapp.com/api/categories/1/products`
+  * `params: { "product": { "name": "Quần jean nữ rách gối 169 (xanh đậm)", "descriptions": "Kiểu dáng cá tính năng động, thiết kế độc đáo, dễ dàng phối hợp trang phục", "price": "165000", "quantity": "20",  "category_id": "1", "image_products_attributes": {"0": { "name": "image 1"}, "1": {"name": "image2"} } } }`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "product": {
+        "id": 1,
+        "name": "Quần jean nữ rách gối 169 (xanh đậm)",
+        "price": 165000,
+        "quantity": 20,
+        "category_id": 1,
+        "sales": 0,
+        "descriptions": null,
+        "image_products": [
+          {
+            "id": 1,
+            "name": "image 1",
+            "photo": null
+          },
+          {
+            "id": 2,
+            "name": "image2",
+            "photo": null
+          }
+        ]
+      }
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+
+### Show information for product
+
+**URL:** [api/products](api/categories/1/products/1)
+
+**Method: GET **
+
+**Param request:**
+
+  * `product_id`, type: integer
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories/1/products/:product_id`
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories/1/products/1`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "product": {
+        "id": 1,
+        "name": "Quần jean nữ rách gối 169 (xanh đậm)",
+        "price": 165000,
+        "quantity": 20,
+        "category_id": 1,
+        "sales": 0,
+        "descriptions": null,
+        "image_products": [
+          {
+            "id": 1,
+            "name": "image 1",
+            "photo": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488678106/fdo77mnyqcpodvwhicia.webp"
+          },
+          {
+            "id": 2,
+            "name": "image2",
+            "photo": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488678108/tojalpm5gahrbgq5ghex.jpg"
+          }
+        ]
+      }
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+### Update information for product
+
+**URL:** [api/products](api/categories/1/products/1)
+
+**Method: PATCH **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `name`, type: string
+  * `price`, type: float
+  * `descriptions`, type: string
+  * `sales`, type: float
+  * `quantity`, type: integer
+  * `category_id`, type: integer
+  * `image for product`:
+    * `id`, type: integer
+    * `photo`, type: string
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/categories/1/products/1`
+  * `params: {  "descriptions": "Kiểu dáng cá tính năng động, thiết kế độc đáo, dễ dàng phối hợp trang phục", "image_products_attributes": {"0": {"id": "1", "photo": "UklGRvzgBQBXRUJQVlA4IPDgBQBQ8AydASpSA1IDPgQBLwAACJZS0Df2b7AFx5E/nqn9jr37W9oHpP9F+xf99/5H+W+Sfk/rw9Efff81/jf7//2/8x/2fyC/b/+L/U/vB/n+mj3//bf9r/Z/tv/mf/v8JXN3+e/xv+b/2X+A/+f/L/9v5r/1H/L/1/+7/1/+W//v/f/DX9i/yH/M/0P+f/4H7//+H9BP5z/Tv8l/f/81/sf8D/8/+D+JP+Z/6f+J/x/+78pP8d/wP/X/sf9t/0vkT/Vv7p/rP8V/mv9z+/P/b/I//ef9L/U/6r/u/v/9ov7z/pP+R/nf9j/1P3//AP+b/0v/L/mF+/H/H/Kv/s//X/o/9z///Rd/iP+L/7f99/vP/D9Bf9B/uf+5/af/k/v//1/yX/7v/k/2v+1//X+x+07/Bf8H/wf6z/W/+7/U///8Fv6d/c/9x+zv/Z/zf/7/7/4Af/L///874vv4B/4P/57qH8A/eL8//qngS73fpP4ef2f+0/4D...."}, "1": {"id": "2", "photo": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAMgAyADASIAAhEBAxEB/8QAHQAAAQQDAQEAAAAAAAAAAAAABAIDBQYABwgBCf/EAFMQAAEDAgMFBAcEBgYIBAYCAwIAAQMEEgURIgYTITEyB0FCUggUI1FhYnIVM3GCJIGRkqKyFkOhscHCCSU0NVNz0dImY+HiFxg2ZPDyRFR08YP/xAAcAQACAwEBAQEAAAAAAAAAAAACAwAEBQEGBwj/xABDEQACAgECBAQBCAcGBQUBAAAAAQIDEgQRBSEiMhMxQlIzBhQjQWJysfAVYXGBkbLRUVOCkqLSByRDocI0weHi8kT/2gAMAwEAAhEDEQA/AN4EPyrAHUnjF8uK8CO4S8K8uvM9g2JARyFvEp"} } } }`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "product": {
+        "id": 1,
+        "name": "Quần jean nữ rách gối 169 (xanh đậm)",
+        "price": 165000,
+        "quantity": 20,
+        "category_id": 1,
+        "sales": 0,
+        "descriptions": null,
+        "image_products": [
+          {
+            "id": 1,
+            "name": "image 1",
+            "photo": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488678106/fdo77mnyqcpodvwhicia.webp"
+          },
+          {
+            "id": 2,
+            "name": "image2",
+            "photo": "http://res.cloudinary.com/dnvmk5bvc/image/upload/v1488678108/tojalpm5gahrbgq5ghex.jpg"
+          }
+        ]
+      }
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
