@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  not_authenticated: "Không đưọc quyền thực hiện"
+  error_logout: "SignOut unsuccessfull"
+  logout_success: "SignOut successfullly"
   api:
     v1:
       categories:
