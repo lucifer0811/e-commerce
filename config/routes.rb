@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root "application#api"
   get "api_document" => "application#api"
-  devise_for :users
 
   namespace :api, defaults: {format: "json"} do
     scope module: :v1 do
+      devise_for :users
       resources :users, only: [:show, :create, :update]
       resources :sessions, only: [:create, :destroy]
       resources :categories do

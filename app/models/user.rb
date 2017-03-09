@@ -1,19 +1,18 @@
 class User < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  before_save {email.downcase!}
+  # before_save {email.downcase!}
   before_create :generate_authentication_token!
 
   validates :auth_token, uniqueness: true
   validates :name, presence: true, length: {maximum: 50}
   validates :phone_number, length: {minimum: 10, maximum: 11}
-  validates :email, presence: true, length: {maximum: 255},
-    format: {with: VALID_EMAIL_REGEX},
-    uniqueness: {scope: :uid, case_sensitive: false}
+  # validates :email, presence: true, length: {maximum: 255},
+  #   format: {with: VALID_EMAIL_REGEX},
+  #   uniqueness: {scope: :uid, case_sensitive: false}
 
   mount_base64_uploader :avatar, PhotoUploader
 
