@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :phone_number, length: {minimum: 10, maximum: 11}
   mount_base64_uploader :avatar, PhotoUploader
 
+  has_many :orders, dependent: :destroy
+
   ATTRIBUTES_PARAMS = [:name, :email, :password, :password_confirmation,
     :avatar, :birthday, :address, :phone_number]
 

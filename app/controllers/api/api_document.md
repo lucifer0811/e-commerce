@@ -576,3 +576,262 @@
 
 --------------
 
+##5. Order
+
+### Create new Order
+
+**URL:** [api/orders](api/users/1/orders)
+
+**Method: POST **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `user_id`, type: integer
+  * `product_ids_and_quantities`
+
+**Request example:**
+
+  * `POST: https://ecommercev1.herokuapp.com/api/categories/1/orders`
+  * `params: {"order": {"user_id": "1", "product_ids_and_quantities": [ [3,5]]}}`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "order": {
+        "id": 1,
+        "total": 2500000,
+        "products": [
+          {
+            "id": 3,
+            "name": "Nước hoa Mỹ",
+            "price": 500000,
+            "quantity": 0,
+            "category_id": 1,
+            "sales": 0,
+            "descriptions": "Hương thơm quyến rũ",
+            "image_products": [
+              {
+                "id": 5,
+                "name": "image 1",
+                "photo": null
+              },
+              {
+                "id": 6,
+                "name": "image 2",
+                "photo": null
+              }
+            ]
+          }
+        ]
+      }
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{
+      "errors": {
+        "Nước hoa Mỹ": [
+          "Is out of stock, just n left"
+        ]
+      }
+    }`
+    `n : số lượng của sản phẩm còn lại trong hệ thống`
+
+    *status: 422*
+
+--------------
+
+### Show list order for user
+
+**URL:** [api/orders](api/users/1/orders)
+
+**Method: GET **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `user_id`, type: integer
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/users/1/orders`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "orders": [
+        {
+          "id": 1,
+          "total": 1118000,
+          "products": [
+            {
+              "id": 1,
+              "name": "Nước hoa nam Jolie Dion Black Blue Eau de parfum 100ml ",
+              "price": 259000,
+              "quantity": 10,
+              "category_id": 2,
+              "sales": 0,
+              "descriptions": "Hương thơm quyến rũ",
+              "image_products": [
+                {
+                  "id": 1,
+                  "name": "image 1",
+                  "photo": null
+                },
+                {
+                  "id": 2,
+                  "name": "image 2",
+                  "photo": null
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "quần jeans",
+              "price": 300000,
+              "quantity": 2,
+              "category_id": 1,
+              "sales": 0,
+              "descriptions": "Hương thơm quyến rũ",
+              "image_products": [
+                {
+                  "id": 3,
+                  "name": "image 1",
+                  "photo": null
+                },
+                {
+                  "id": 4,
+                  "name": "image 2",
+                  "photo": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "total": 1118000,
+          "products": [
+            {
+              "id": 1,
+              "name": "Nước hoa nam Jolie Dion Black Blue Eau de parfum 100ml ",
+              "price": 259000,
+              "quantity": 10,
+              "category_id": 2,
+              "sales": 0,
+              "descriptions": "Hương thơm quyến rũ",
+              "image_products": [
+                {
+                  "id": 1,
+                  "name": "image 1",
+                  "photo": null
+                },
+                {
+                  "id": 2,
+                  "name": "image 2",
+                  "photo": null
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "quần jeans",
+              "price": 300000,
+              "quantity": 2,
+              "category_id": 1,
+              "sales": 0,
+              "descriptions": "Hương thơm quyến rũ",
+              "image_products": [
+                {
+                  "id": 3,
+                  "name": "image 1",
+                  "photo": null
+                },
+                {
+                  "id": 4,
+                  "name": "image 2",
+                  "photo": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
+
+### Show details information order
+
+**URL:** [api/orders](api/users/1/orders/1)
+
+**Method: GET **
+
+**Param request:**
+
+  * `Authorization`, type: string, presence: true (In Headers of request)
+  * `user_id`, type: integer
+  * `order_id`, type: integer
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/api/users/1/orders/1`
+
+**Response:**
+
+  * **Success**
+
+    `{
+      "order": {
+        "id": 1,
+        "total": 2500000,
+        "products": [
+          {
+            "id": 3,
+            "name": "Nước hoa Mỹ",
+            "price": 500000,
+            "quantity": 0,
+            "category_id": 1,
+            "sales": 0,
+            "descriptions": "Hương thơm quyến rũ",
+            "image_products": [
+              {
+                "id": 5,
+                "name": "image 1",
+                "photo": null
+              },
+              {
+                "id": 6,
+                "name": "image 2",
+                "photo": null
+              }
+            ]
+          }
+        ]
+      }
+    }`
+
+    *status: 200*
+
+  * **Unsuccess**
+
+    `{ "errors": "..." }`
+
+    *status: 422*
+
+--------------
