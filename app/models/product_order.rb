@@ -7,4 +7,8 @@ class ProductOrder < ApplicationRecord
   def decrement_product_quantity!
     self.product.decrement!(:quantity, quantity)
   end
+
+  scope :list_product_of_order, ->(order_id) do
+    where("order_id = ?", order_id)
+  end
 end
