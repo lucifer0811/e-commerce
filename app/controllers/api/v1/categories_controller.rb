@@ -2,6 +2,7 @@ class Api::V1::CategoriesController < ApplicationController
   load_resource
   respond_to :json
   before_action :authenticate_with_token!, only: [:create, :update, :destroy]
+  before_action :create_cmapi, only: :show
 
   def show
     render json: @category
@@ -38,6 +39,12 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   private
+  def create_cmapi
+    @products = Product.all
+    @users = User.all
+    @list_cmapi = ExportCmapi.new(@products, @users).get_list_cmapi
+  end
+
   def category_params
     params.require(:category).permit :name
   end

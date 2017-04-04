@@ -9,6 +9,10 @@ class Order < ApplicationRecord
   validates :user_id, presence: true
   validate :validates_product_order_with_quantity
 
+  scope :list_order_of_user, ->(user_id) do
+    where("user_id = ?", user_id)
+  end
+
   def set_total!
     self.total = 0
     product_orders.each do |product_order|
