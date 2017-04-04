@@ -33,7 +33,7 @@ class ExportCmapi
       j = i + 1
       array_item_check.push(array_list_popular_products[i])
       while j < array_list_popular_products.length do
-        count = 0;
+        count = 0
         array_item_check.push(array_list_popular_products[j])
         @users.each do |user|
           list_order_for_users = UserOrder.new(user).list_order_for_user
@@ -53,6 +53,45 @@ class ExportCmapi
       i = i + 1
     end
     cmapi
+  end
+
+  def get_list_cmaps_first
+    array_list_popular_products = list_product_polular
+    count_item_popular = array_list_popular_products.length
+    cmaps = [] # array have cmaps
+    i = 0
+    while i < array_list_popular_products.length do
+      j = i +1
+      while j < array_list_popular_products.length do
+        count = 0
+        @users.each do |user|
+          list_order_for_users = UserOrder.new(user).list_order_for_user
+          array_valid_i = build_array_valid_in_order(array_list_popular_products[i], list_order_for_users)
+          array_valid_j = build_array_valid_in_order(array_list_popular_products[j], list_order_for_users)
+          if (array_valid_i.include?(1) && array_valid_j.include?(1) && (array_valid_i != array_valid_j))
+            count = count +1
+          end
+        end
+        if check_with_min_sup? count, @users.length
+          cmaps.push([[array_list_popular_products[i]],[array_list_popular_products[j]]])
+        end
+        j = j + 1
+      end
+      i = i + 1
+    end
+    cmaps
+  end
+
+  def build_array_valid_in_order a, list_order_for_user
+    array = []
+    list_order_for_user.each do |t|
+      if t.include? a
+        array.push(1)
+      else
+        array.push(0)
+      end
+    end
+    array
   end
 
   def get_list_cmapi

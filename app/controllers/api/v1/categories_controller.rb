@@ -42,7 +42,9 @@ class Api::V1::CategoriesController < ApplicationController
   def create_cmapi
     @products = Product.all
     @users = User.all
-    @list_cmapi = ExportCmapi.new(@products, @users).get_list_cmapi
+    expot_cmap = ExportCmapi.new(@products, @users)
+    @list_cmapi = expot_cmap.get_list_cmapi_first
+    @list_cmaps = expot_cmap.get_list_cmaps_first
   end
 
   def category_params
