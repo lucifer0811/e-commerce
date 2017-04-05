@@ -5,7 +5,7 @@ class ExportCmapi
   end
 
   def list_product_polular
-    ProductPopular.new(@products).list_product_popular
+    ProductPopular.new(@products, @users).list_product_popular
   end
 
   def check_with_min_sup? a, b
@@ -49,6 +49,7 @@ class ExportCmapi
           cmapi.push([array_list_popular_products[i], array_list_popular_products[j]])
         end
         j = j + 1
+        array_item_check.pop
       end
       i = i + 1
     end

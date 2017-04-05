@@ -1,13 +1,15 @@
 class Api::V1::OrdersController < ApplicationController
   before_action :authenticate_with_token!
   respond_to :json
+  before_action :load_user, only: [:index, :show]
 
   def show
-    respond_with current_user.orders.find_by id: params[:id]
+    byebug
+    respond_with @user.orders.find_by id: params[:id]
   end
 
   def index
-    respond_with current_user.orders
+    respond_with @user.orders
   end
 
   def create
@@ -23,6 +25,11 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   private
+
+  def load_user
+    @user = User.find_by id: params[:user_id]
+  end
+
   def order_params
     params.require(:order).permit :user_id, :total, product_ids_and_quantities: []
   end
