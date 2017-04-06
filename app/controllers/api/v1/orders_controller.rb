@@ -4,7 +4,6 @@ class Api::V1::OrdersController < ApplicationController
   before_action :load_user, only: [:index, :show]
 
   def show
-    byebug
     respond_with @user.orders.find_by id: params[:id]
   end
 

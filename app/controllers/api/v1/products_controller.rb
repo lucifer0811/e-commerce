@@ -40,7 +40,7 @@ class Api::V1::ProductsController < Api::ApplicationController
   end
 
   def load_dfs_pruning
-    @def_pruning = DefPruning.new(Product.all, User.all).build_list_sequence_step
+    @def_pruning = DefPruning.new(Product.all, User.all).build_list_sequence
   end
 
   def load_category
