@@ -107,6 +107,78 @@ class DefPruning
     array_results.uniq
   end
 
+  def build_list_sequence_itep
+    array_results = []
+    list_product_polulars = list_product_polular
+    list_product_polulars.each do |t|
+      temp_i = get_Itemp_for_each_sequence(t, list_cmapi)
+      i = 0
+      while i < temp_i.length
+        if t != temp_i[i]
+          array_results.push([t, temp_i[i]])
+        end
+        j = 0
+        while j < temp_i.length
+          if (temp_i[i] != temp_i[j])
+            array_check_itemp = [t, temp_i[i], temp_i[j]]
+            d = Array.new(array_check_itemp)
+            count = 0
+            @users.each do |user|
+              list_order_for_users = UserOrder.new(user).list_order_for_user
+              list_order_for_users.each do |e|
+                if check_two_array_relationship?(e,array_check_itemp)
+                  count = count + 1
+                  break
+                end
+              end
+            end
+            if check_with_min_sup? count, @users.length
+              array_results.push(d)
+              array_check_list_itemp = array_check_itemp
+              k = Array.new(array_check_list_itemp)
+              z = j + 1
+              while z < temp_i.length
+                array_check_list_itemp.push(temp_i[z])
+                count_i_product = 0
+                @users.each do |user|
+                  list_order_for_users = UserOrder.new(user).list_order_for_user
+                  list_order_for_users.each do |e|
+                    if e.include?(array_check_list_itemp)
+                      count_i_product = count_i_product + 1
+                      break
+                    end
+                  end
+                end
+                if check_with_min_sup? count_i_product, @users.length
+                  array_results.push(k)
+                else
+                  array_check_list_itemp.pop
+                  break
+                end
+                z = z + 1
+              end
+            end
+          end
+          j = j + 1
+        end
+        i = i + 1
+      end
+    end
+    array_results.each do |array_result|
+      array_result.sort!
+    end
+    array_results.uniq
+  end
+
+  def build_list_sequence
+    build_list_sequence_itep + build_list_sequence_step
+  end
+
+  def check_two_array_relationship? a, b
+    c = a - b
+    (a.length - b.length) == c.length
+  end
+
   def list_product_in_order a, order_of_users
     array_check = []
     order_of_users.each do |order_of_user|
