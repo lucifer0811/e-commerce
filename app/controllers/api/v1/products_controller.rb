@@ -2,7 +2,7 @@ class Api::V1::ProductsController < Api::ApplicationController
   load_resource
   before_action :load_categories, :load_category, only: [:create, :update]
   before_action :authenticate_with_token!, only: [:create, :update]
-  before_action :load_list_product_popular, only: :show
+  before_action :load_dfs_pruning, only: :show
 
   def show
     render json: @product
@@ -36,7 +36,11 @@ class Api::V1::ProductsController < Api::ApplicationController
   end
 
   def load_list_product_popular
-    @list_product = ProductPopular.new(Product.all).list_product_popular
+    @list_product = ProductPopular.new(Product.all, User.all).list_product_popular
+  end
+
+  def load_dfs_pruning
+    @def_pruning = DefPruning.new(Product.all, User.all).build_list_sequence_step
   end
 
   def load_category
