@@ -1,7 +1,9 @@
 class DefPruning
-  def initialize products, users
-    @products = products
-    @users = users
+  $global_count = 3
+  $list_results = []
+  def initialize
+    @products = Product.all
+    @users = User.all
     @export_cmap = ExportCmapi.new(@products, @users)
   end
 
@@ -170,8 +172,11 @@ class DefPruning
     array_results.uniq
   end
 
+
   def build_list_sequence
-    build_list_sequence_itep + build_list_sequence_step
+    array_list = build_list_sequence_itep + build_list_sequence_step
+    $list_results = array_list
+    array_list
   end
 
   def check_two_array_relationship? a, b
@@ -213,4 +218,5 @@ class DefPruning
     end
     array_check
   end
+
 end
