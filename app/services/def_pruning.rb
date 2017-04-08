@@ -170,8 +170,32 @@ class DefPruning
     array_results.uniq
   end
 
-  def build_list_sequence
-    build_list_sequence_itep + build_list_sequence_step
+  def build_list_sequence(product_id)
+    array_result = []
+    list_product = []
+    array_lists = build_list_sequence_itep + build_list_sequence_step
+    array_lists.each do |array_list|
+      if (array_list.length >= 2 && array_list.include?(product_id))
+        array_id = [product_id]
+        c = array_list - array_id
+        c.each do |t|
+          array_result.push(t)
+        end
+      end
+    end
+    array_lists.each do |array_list|
+      if (array_list.length >= 2 && array_list.include?([product_id]))
+        array_id = [product_id]
+        c = array_list - array_id
+        c.each do |t|
+          t.each do |r|
+            array_result.push(r)
+          end
+        end
+      end
+    end
+    array_result = array_result.uniq - [product_id]
+    array_result
   end
 
   def check_two_array_relationship? a, b
