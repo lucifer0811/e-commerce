@@ -8,9 +8,15 @@ class ProductSerializer < ActiveModel::Serializer
     arrays = object.list_product_with_me
     arrays.each do |array|
       p = Product.find_by id: array
-      images = p.image_products
-      a = [p, images]
+      image_urls = []
+      p.image_products.each do |image_product|
+        image_urls.push(image_product.photo.url)
+      end
+      a = [p, image_urls]
       list_products.push(a)
+    end
+    if list_products.length > 3
+      list_products = list_products.sample(3)
     end
     list_products
   end
