@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include Authenticable
 
+  $list_results = DefPruning.new.build_list_sequence
+
   def api
     str = File.open("#{Rails.root}/app/controllers/api/api_document.md").read
     str = BlueCloth.new(str).to_html

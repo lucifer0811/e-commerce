@@ -1,6 +1,5 @@
 class DefPruning
   $global_count = 3
-  $list_results = []
   def initialize
     @products = Product.all
     @users = User.all
@@ -28,7 +27,6 @@ class DefPruning
     end
     stemp
   end
-
 
   def get_Itemp_for_each_sequence a, array_cmapi
     itemp = []
@@ -174,9 +172,7 @@ class DefPruning
 
 
   def build_list_sequence
-    array_list = build_list_sequence_itep + build_list_sequence_step
-    $list_results = array_list
-    array_list
+    build_list_sequence_itep + build_list_sequence_step
   end
 
   def check_two_array_relationship? a, b
