@@ -2,7 +2,6 @@ class Api::V1::ProductsController < Api::ApplicationController
   load_resource
   before_action :load_categories, :load_category, only: [:create, :update]
   before_action :authenticate_with_token!, only: [:create, :update]
-  before_action :load_list, only: :show
 
   def show
     render json: @product
@@ -33,14 +32,6 @@ class Api::V1::ProductsController < Api::ApplicationController
   private
   def load_categories
     @categories = Category.all
-  end
-
-  def load_list_product_popular
-    @list_product = ProductPopular.new(Product.all, User.all).list_product_popular
-  end
-
-  def load_list
-    @list = DefPruning.new.build_list_sequence
   end
 
   def load_category
