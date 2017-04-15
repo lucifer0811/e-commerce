@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :auth_token, uniqueness: true
   validates :name, presence: true, length: {maximum: 50}
+  # validates :address, presence: true
   validates :phone_number, length: {minimum: 10, maximum: 11}
   mount_base64_uploader :avatar, PhotoUploader
 

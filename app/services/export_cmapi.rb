@@ -1,11 +1,23 @@
 class ExportCmapi
+  $list_all_order = []
   def initialize products, users
     @products = products
     @users = users
+    list_all_orders_of_all_users
   end
 
   def list_product_polular
     ProductPopular.new(@products, @users).list_product_popular
+  end
+
+  def list_all_orders_of_all_users
+    list_of_all_order = []
+    @users.each do |user|
+      list_order = UserOrder.new(user).list_order_for_user
+      list_of_all_order.push(list_order)
+    end
+    $list_all_order = list_of_all_order
+    list_of_all_order
   end
 
   def check_with_min_sup? a, b
@@ -35,8 +47,7 @@ class ExportCmapi
       while j < array_list_popular_products.length do
         count = 0
         array_item_check.push(array_list_popular_products[j])
-        @users.each do |user|
-          list_order_for_users = UserOrder.new(user).list_order_for_user
+        $list_all_order.each do |list_order_for_users|
           list_order_for_users.each do |t|
             if check_valid_array_in_array?(array_item_check, t)
               count += 1
@@ -65,8 +76,7 @@ class ExportCmapi
       j = i +1
       while j < array_list_popular_products.length do
         count = 0
-        @users.each do |user|
-          list_order_for_users = UserOrder.new(user).list_order_for_user
+        $list_all_order.each do |list_order_for_users|
           array_valid_i = build_array_valid_in_order(array_list_popular_products[i], list_order_for_users)
           array_valid_j = build_array_valid_in_order(array_list_popular_products[j], list_order_for_users)
           if (array_valid_i.include?(1) && array_valid_j.include?(1) && (array_valid_i != array_valid_j))
@@ -109,8 +119,7 @@ class ExportCmapi
           b = Array.new(list_init)
           if (list_init.uniq.length > list_init_size)
             count = 0
-            @users.each do |user|
-              list_order_for_users = UserOrder.new(user).list_order_for_user
+            $list_all_order.each do |list_order_for_users|
               list_order_for_users.each do |t|
                 if check_valid_array_in_array?(list_init, t)
                   count += 1

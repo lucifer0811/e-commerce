@@ -398,6 +398,103 @@
 
 ##4. Product
 
+### Lists products
+
+**URL:** [api/products](api/products)
+
+**Method: GET **
+
+**Param request:**
+
+  * `params[:search]`, type: string
+
+**Request example:**
+
+  * `GET: https://ecommercev1.herokuapp.com/products?search=string`
+
+**Response:**
+
+  * `search=`
+
+    * `{
+  "products": [
+    {
+      "id": 6,
+      "name": "Bộ makeup",
+      "price": 165000,
+      "category_id": 3,
+      "sales": 0,
+      "image": null
+    },
+    {
+      "id": 5,
+      "name": "Nước hoa",
+      "price": 165000,
+      "category_id": 3,
+      "sales": 0,
+      "image": null
+    },
+    {
+      "id": 4,
+      "name": "Son",
+      "price": 365000,
+      "category_id": 3,
+      "sales": 0,
+      "image": null
+    },
+    {
+      "id": 3,
+      "name": "Áo khóa da",
+      "price": 365000,
+      "category_id": 2,
+      "sales": 0,
+      "image": null
+    },
+    {
+      "id": 2,
+      "name": "Áo dài Việt Nam",
+      "price": 365000,
+      "category_id": 2,
+      "sales": 0,
+      "image": null
+    },
+    {
+      "id": 1,
+      "name": "Sam Sung S7",
+      "price": 1165000,
+      "category_id": 1,
+      "sales": 0,
+      "image": null
+    }
+  ]
+}`
+
+  * `search=Áo`
+
+    * `
+    {
+      "products": [
+        {
+          "id": 3,
+          "name": "Áo khóa da",
+          "price": 365000,
+          "category_id": 2,
+          "sales": 0,
+          "image": null
+        },
+        {
+          "id": 2,
+          "name": "Áo dài Việt Nam",
+          "price": 365000,
+          "category_id": 2,
+          "sales": 0,
+          "image": null
+        }
+      ]
+    }
+    `
+--------------
+
 ### Create new Product
 
 **URL:** [api/products](api/categories/1/products)
