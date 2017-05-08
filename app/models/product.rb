@@ -7,6 +7,10 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: :true
   accepts_nested_attributes_for :image_products, allow_destroy: true
 
+  scope :search_by_name, lambda {|search|
+    where("lower(name) LIKE ?", "%#{search.downcase}%" )
+  }
+
   def list_product_with_me
     array_result = []
     $list_results.each do |array_list|

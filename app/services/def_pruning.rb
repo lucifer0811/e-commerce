@@ -1,5 +1,5 @@
 class DefPruning
-  $global_count = 3
+  $list_results = []
   def initialize
     @products = Product.all
     @users = User.all
@@ -64,8 +64,7 @@ class DefPruning
             array_check = [[t],[s_temp[i], s_temp[j]]]
             b = Array.new(array_check)
             count = 0
-            @users.each do |user|
-              list_order_for_users = UserOrder.new(user).list_order_for_user
+            $list_all_order.each do |list_order_for_users|
               array_check_for_product = product_in_order(t, list_order_for_users)
               array_check_for_products = list_product_in_order([s_temp[i], s_temp[j]], list_order_for_users)
               if (array_check_for_product.include?(1) && array_check_for_products.include?(1) && (array_check_for_product != array_check_for_products))
@@ -81,8 +80,7 @@ class DefPruning
                 array_ckeck_list = [[t],a1]
                 c = Array.new(array_ckeck_list)
                 count_1 = 0
-                @users.each do |user|
-                  list_order_for_users = UserOrder.new(user).list_order_for_user
+                $list_all_order.each do |list_order_for_users|
                   array_check_for_product_z = product_in_order(t, list_order_for_users)
                   array_check_for_products_z = list_product_in_order(a1, list_order_for_users)
                   if (array_check_for_product_z.include?(1) && array_check_for_products_z.include?(1) && (array_check_for_product_z != array_check_for_products_z))
@@ -123,8 +121,7 @@ class DefPruning
             array_check_itemp = [t, temp_i[i], temp_i[j]]
             d = Array.new(array_check_itemp)
             count = 0
-            @users.each do |user|
-              list_order_for_users = UserOrder.new(user).list_order_for_user
+            $list_all_order.each do |list_order_for_users|
               list_order_for_users.each do |e|
                 if check_two_array_relationship?(e,array_check_itemp)
                   count = count + 1
@@ -140,8 +137,7 @@ class DefPruning
               while z < temp_i.length
                 array_check_list_itemp.push(temp_i[z])
                 count_i_product = 0
-                @users.each do |user|
-                  list_order_for_users = UserOrder.new(user).list_order_for_user
+                $list_all_order.each do |list_order_for_users|
                   list_order_for_users.each do |e|
                     if e.include?(array_check_list_itemp)
                       count_i_product = count_i_product + 1
@@ -172,7 +168,9 @@ class DefPruning
 
 
   def build_list_sequence
-    build_list_sequence_itep + build_list_sequence_step
+    array_list = build_list_sequence_itep + build_list_sequence_step
+    $list_results = array_list
+    array_list
   end
 
   def check_two_array_relationship? a, b

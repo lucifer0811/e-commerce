@@ -2,6 +2,34 @@ class Api::V1::ProductsController < Api::ApplicationController
   load_resource
   before_action :load_categories, :load_category, only: [:create, :update]
   before_action :authenticate_with_token!, only: [:create, :update]
+  before_action :load_list, only: :show
+
+  def index
+    list_product = []
+    if params[:search]
+      @products = Product.search_by_name(params[:search]).order("created_at DESC")
+      @products.each do |product|
+        a = {id: product.id, name: product.name, price: product.price,
+          category_id: product.category_id, sales: product.sales,
+          image: product.image_products.first.photo.url}
+        list_product.push(a)
+      end
+      a = {products: list_product}
+      @products = a
+      render json: @products
+    else
+      @products = Product.all.order("created_at DESC").order("created_at DESC")
+      @products.each do |product|
+        a = {id: product.id, name: product.name, price: product.price,
+          category_id: product.category_id, sales: product.sales,
+          image: product.image_products.first.photo.url}
+        list_product.push(a)
+      end
+      a = {products: list_product}
+      @products = a
+      render json: @products
+    end
+  end
 
   def show
     render json: @product
@@ -32,6 +60,10 @@ class Api::V1::ProductsController < Api::ApplicationController
   private
   def load_categories
     @categories = Category.all
+  end
+
+  def load_list
+    @list = DefPruning.new.build_list_sequence
   end
 
   def load_category
